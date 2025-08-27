@@ -131,89 +131,6 @@ class LowRankBilinearFusion(nn.Module):
         return self.out(inter)  # (B, out_dim)
 
 
-# class ABMIL_Surv_PG(nn.Module):
-#     def __init__(self, feat_type='uni', clinical_dim=27, rna_input_dim=19359, rank=64):
-#         super().__init__()
-#         if feat_type == 'uni':
-#             size = [1024, 512, 256]
-#         elif feat_type == 'gigapath':
-#             size = [1536, 768, 384]
-
-#         # Histo attention
-#         fc = [nn.Linear(size[0], size[1]), nn.ReLU(), nn.Dropout(0.25)]
-#         fc.append(Attn_Net_Gated(L=size[1], D=size[2], dropout=True, n_classes=1))
-#         self.attention_net = nn.Sequential(*fc)
-
-#         # RNA encoder
-#         self.rna_encoder = RNAEncoder(input_dim=rna_input_dim, output_dim=128)
-
-#         # Low-rank fusion modules
-#         self.fuse_hr = LowRankBilinearFusion(size[1], 128, rank, 64)       # histo × rna
-#         self.fuse_hc = LowRankBilinearFusion(size[1], clinical_dim, rank, 32)  # histo × clinic
-#         self.fuse_rc = LowRankBilinearFusion(128, clinical_dim, rank, 32)      # rna × clinic
-
-#         # Final classifier
-#         self.classifier = nn.Linear(64+32+32, 1)
-
-#         initialize_weights(self)
-
-#     def relocate(self):
-#         device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#         self.attention_net = self.attention_net.to(device)
-#         self.classifier = self.classifier.to(device)
-#         self.rna_encoder = self.rna_encoder.to(device)
-#         self.fuse_hr = self.fuse_hr.to(device)
-#         self.fuse_hc = self.fuse_hc.to(device)
-#         self.fuse_rc = self.fuse_rc.to(device)
-
-#     def forward(self, h, clinic, rna, attention_only=False):
-#         A, h_feat = self.attention_net(h)  
-#         A = torch.transpose(A, 1, 0)
-#         if attention_only:
-#             return A
-
-#         A = F.softmax(A, dim=1)
-#         M = torch.mm(A, h_feat)  # histo representation
-
-#         rna_feat = self.rna_encoder(rna)
-
-#         # Low-rank fusions
-#         hr = self.fuse_hr(M, rna_feat)
-#         hc = self.fuse_hc(M, clinic)
-#         rc = self.fuse_rc(rna_feat, clinic)
-
-#         # Combine all fused interactions
-#         combined = torch.cat([hr, hc, rc], dim=1)
-
-#         logits = self.classifier(combined)  
-#         risk_score = logits.squeeze(1)
-#         return risk_score, A
-
-
-
-class CrossAttentionFusion(nn.Module):
-    def __init__(self, dim_q, dim_kv, hidden_dim, out_dim, num_heads=4):
-        super().__init__()
-        self.attn = nn.MultiheadAttention(embed_dim=hidden_dim, num_heads=num_heads, batch_first=True)
-        self.query_proj = nn.Linear(dim_q, hidden_dim)
-        self.key_proj = nn.Linear(dim_kv, hidden_dim)
-        self.value_proj = nn.Linear(dim_kv, hidden_dim)
-        self.out_proj = nn.Linear(hidden_dim, out_dim)
-
-    def forward(self, q, kv):
-        # q: (B, Dq), kv: (B, Dkv)
-        q = q.unsqueeze(1)  # (B, 1, Dq)
-        kv = kv.unsqueeze(1)  # (B, 1, Dkv)
-
-        q_proj = self.query_proj(q)   # (B, 1, H)
-        k_proj = self.key_proj(kv)    # (B, 1, H)
-        v_proj = self.value_proj(kv)  # (B, 1, H)
-
-        attn_out, _ = self.attn(q_proj, k_proj, v_proj)  # (B, 1, H)
-        out = self.out_proj(attn_out.squeeze(1))         # (B, out_dim)
-        return out
-
-
 class ABMIL_Surv_PG(nn.Module):
     def __init__(self, feat_type='uni', clinical_dim=27, rna_input_dim=19359, rank=64):
         super().__init__()
@@ -230,10 +147,10 @@ class ABMIL_Surv_PG(nn.Module):
         # RNA encoder
         self.rna_encoder = RNAEncoder(input_dim=rna_input_dim, output_dim=128)
 
-        # Fusion modules
-        self.fuse_hr = CrossAttentionFusion(size[1], 128, hidden_dim=128, out_dim=64)  # histo × rna
-        self.fuse_hc = LowRankBilinearFusion(size[1], clinical_dim, rank, 32)          # histo × clinic
-        self.fuse_rc = LowRankBilinearFusion(128, clinical_dim, rank, 32)              # rna × clinic
+        # Low-rank fusion modules
+        self.fuse_hr = LowRankBilinearFusion(size[1], 128, rank, 64)       # histo × rna
+        self.fuse_hc = LowRankBilinearFusion(size[1], clinical_dim, rank, 32)  # histo × clinic
+        self.fuse_rc = LowRankBilinearFusion(128, clinical_dim, rank, 32)      # rna × clinic
 
         # Final classifier
         self.classifier = nn.Linear(64+32+32, 1)
@@ -241,7 +158,7 @@ class ABMIL_Surv_PG(nn.Module):
         initialize_weights(self)
 
     def relocate(self):
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.attention_net = self.attention_net.to(device)
         self.classifier = self.classifier.to(device)
         self.rna_encoder = self.rna_encoder.to(device)
@@ -250,7 +167,7 @@ class ABMIL_Surv_PG(nn.Module):
         self.fuse_rc = self.fuse_rc.to(device)
 
     def forward(self, h, clinic, rna, attention_only=False):
-        A, h_feat = self.attention_net(h)
+        A, h_feat = self.attention_net(h)  
         A = torch.transpose(A, 1, 0)
         if attention_only:
             return A
@@ -260,19 +177,17 @@ class ABMIL_Surv_PG(nn.Module):
 
         rna_feat = self.rna_encoder(rna)
 
-        # Fusions
-        hr = self.fuse_hr(M, rna_feat)  # cross-attention version
+        # Low-rank fusions
+        hr = self.fuse_hr(M, rna_feat)
         hc = self.fuse_hc(M, clinic)
         rc = self.fuse_rc(rna_feat, clinic)
 
-        # Combine
+        # Combine all fused interactions
         combined = torch.cat([hr, hc, rc], dim=1)
 
-        logits = self.classifier(combined)
+        logits = self.classifier(combined)  
         risk_score = logits.squeeze(1)
         return risk_score, A
-
-
 
 
 

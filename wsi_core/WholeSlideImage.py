@@ -16,8 +16,9 @@ from wsi_core.wsi_utils import savePatchIter_bag_hdf5, initialize_hdf5_bag, coor
 import itertools
 from wsi_core.util_classes import isInContourV1, isInContourV2, isInContourV3_Easy, isInContourV3_Hard, Contour_Checking_fn
 from utils.file_utils import load_pkl, save_pkl
+import tifffile
 
-Image.MAX_IMAGE_PIXELS = 933120000
+Image.MAX_IMAGE_PIXELS = 9331200000000
 
 class WholeSlideImage(object):
     def __init__(self, path):
@@ -91,7 +92,7 @@ class WholeSlideImage(object):
         asset_dict = {'holes': self.holes_tissue, 'tissue': self.contours_tissue}
         save_pkl(mask_file, asset_dict)
 
-    def segmentTissue(self, seg_level=0, sthresh=20, sthresh_up = 255, mthresh=7, close = 0, use_otsu=False, 
+    def segmentTissue(self, mask_path, seg_level=0, sthresh=20, sthresh_up = 255, mthresh=7, close = 0, use_otsu=False, 
                             filter_params={'a_t':100}, ref_patch_size=512, exclude_ids=[], keep_ids=[]):
         """
             Segment the tissue via HSV -> Median thresholding -> Binary threshold
@@ -147,18 +148,16 @@ class WholeSlideImage(object):
                 hole_contours.append(filtered_holes)
 
             return foreground_contours, hole_contours
-        # pdb.set_trace()
-        
-        img = np.array(self.wsi.read_region((0,0), seg_level, self.level_dim[seg_level]))
-        img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)  # Convert to HSV space
-        img_med = cv2.medianBlur(img_hsv[:,:,1], mthresh)  # Apply median blurring
-        
-       
-        # Thresholding
-        if use_otsu:
-            _, img_otsu = cv2.threshold(img_med, 0, sthresh_up, cv2.THRESH_OTSU+cv2.THRESH_BINARY)
-        else:
-            _, img_otsu = cv2.threshold(img_med, sthresh, sthresh_up, cv2.THRESH_BINARY)
+                
+        # Read the provided mask
+        mask_np = tifffile.imread(mask_path)  # Loads as NumPy array
+        # Resize mask to match WSI segmentation level
+        mask_resized = cv2.resize(mask_np, self.level_dim[seg_level], interpolation=cv2.INTER_NEAREST)
+
+        img_otsu = mask_resized.copy()
+        img_otsu = img_otsu.astype(np.uint8)
+
+
         # Morphological closing
         if close > 0:
             kernel = np.ones((close, close), np.uint8)
@@ -422,7 +421,7 @@ class WholeSlideImage(object):
 
 
     def process_contour(self, cont, contour_holes, patch_level, save_path, patch_size = 256, step_size = 256,
-        contour_fn='four_pt', use_padding=True, top_left=None, bot_right=None):
+        contour_fn='four_pt', use_padding=True, top_left=None, bot_right=None, **kwargs):
         # pdb.set_trace()
         start_x, start_y, w, h = cv2.boundingRect(cont) if cont is not None else (0, 0, self.level_dim[patch_level][0], self.level_dim[patch_level][1])
 
@@ -494,23 +493,22 @@ class WholeSlideImage(object):
         # pdb.set_trace()
 
         results = np.array([result for result in results if result is not None])
-        
+    
         print('Extracted {} coordinates'.format(len(results)))
-
-        if len(results)>1:
-            asset_dict = {'coords' :          results}
-            # pdb.set_trace()
-            attr = {'patch_size' :            patch_size, # To be considered...
-                    'patch_level' :           patch_level,
-                    'downsample':             self.level_downsamples[patch_level],
-                    'downsampled_level_dim' : tuple(np.array(self.level_dim[patch_level])),
-                    'level_dim':              self.level_dim[patch_level],
-                    'name':                   self.name,
-                    'save_path':              save_path}
-
-            attr_dict = { 'coords' : attr}
+        
+        if len(results) > 0:
+            asset_dict = {'coords': results}
+            attr = {
+                'patch_size': patch_size,
+                'patch_level': patch_level,
+                'downsample': self.level_downsamples[patch_level],
+                'downsampled_level_dim': tuple(np.array(self.level_dim[patch_level])),
+                'level_dim': self.level_dim[patch_level],
+                'name': self.name,
+                'save_path': save_path
+            }
+            attr_dict = {'coords': attr}
             return asset_dict, attr_dict
-
         else:
             return {}, {}
 

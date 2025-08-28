@@ -28,8 +28,6 @@ Task 3 focuses on **predicting patient survival risk** using multi-modal data:
 - Fusion of slide, RNA, and clinical data with multiple **fusion modules**  
 - Risk score prediction using a **linear classifier**  
 
-> ⚡ The framework enables end-to-end survival prediction from multi-modal patient data.
-
 ---
 
 ## 📂 Data

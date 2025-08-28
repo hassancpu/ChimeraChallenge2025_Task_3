@@ -36,12 +36,14 @@ Task 3 focuses on **predicting patient survival risk** using multi-modal data:
 The CHIMERA Task 3 dataset must be downloaded from the official challenge website.  
 Organize the data as follows:  
 
+```text
 CHIM_Rec_ostu_10x/
-├── pt_files/ # Patch feature files for each slide
-├── seqs/ # RNA sequences
-├── clinics/ # Clinical data files
-gene_order.json # Gene order reference for RNA data
+├── pt_files/             # Patch feature files for each slide
+├── seqs/                 # RNA sequences or embeddings
+├── clinics/              # Clinical data files
+gene_order.json           # Gene order reference for RNA data
 clinical_preprocessor.pkl # Preprocessing object for clinical features
+```
 
 ---
 

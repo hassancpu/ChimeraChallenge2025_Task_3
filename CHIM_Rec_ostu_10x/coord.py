@@ -6,9 +6,14 @@ save the coordinates of the features in .pt file
 import h5py
 import torch
 from glob import glob
+import os
 
 def save_coord(feat_path, coord_paths):
     feat_paths = glob(feat_path + '/*.h5')
+
+    if not os.path.exists(coord_paths):
+        os.makedirs(coord_paths)
+        
     for path in feat_paths:
         with h5py.File(path, 'r') as f:
             coords = f['coords'][()]

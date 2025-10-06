@@ -70,6 +70,9 @@ python extract_features.py \
     --batch_size 256 \
     --slide_ext .tif
 
+# Coords Extraction
+python coord.py
+
 # 3️⃣ Training
 python train.py \
     --model_type pg \

@@ -1,0 +1,14 @@
+SimpleITK
+numpy
+pyvips
+h5py==3.12.1
+opencv-python==4.11.0.86
+matplotlib
+openslide-python
+tifffile
+pandas
+imagecodecs
+timm
+joblib
+scikit-learn==1.5.2
+scipy

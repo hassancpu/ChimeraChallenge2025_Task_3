@@ -107,12 +107,12 @@ python eval.py \
 <table>
 <tr>
 <td align="center">
-  <img src="loss_plot.png" alt="Loss Curves" width="300"/>
+  <img src="loss_plot.png" alt="Loss Curves" width="400"/>
   <br>
   <em>Figure 2: Training and validation loss</em>
 </td>
 <td align="center">
-  <img src="cindex_plot.png" alt="C-index Curves" width="300"/>
+  <img src="cindex_plot.png" alt="C-index Curves" width="400"/>
   <br>
   <em>Figure 3: Training and validation C-index</em>
 </td>

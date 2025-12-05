@@ -98,7 +98,7 @@ python eval.py \
 | **Model**   | **Fusion Strategy**  | **C-index** | 
 |:------------|:---------------:|:---------------:|
 | ABMIL Surv       | Simple concatenation | 0.88 | 
-| **ABMIL Surv PG**    | Low-rank bilinear fusion | **0.91** | 
+| **ABMIL Surv PG**    | **Low-rank bilinear fusion** | **0.91** | 
 | ABMIL Surv PG Res | Fusion + residual branch | 0.91 | 
 
 </div>

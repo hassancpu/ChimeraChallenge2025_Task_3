@@ -21,13 +21,6 @@ Task 3 focuses on **predicting patient survival risk** using multi-modal data:
 - **RNA expression**  
 - **Clinical features**  
 
-**Pipeline Highlights:**
-- Patch-level feature extraction with **UNI model**  
-- Slide-level aggregation using **ABMIL**  
-- RNA embedding compression via **RNA encoder**  
-- Fusion of slide, RNA, and clinical data with multiple **fusion modules**  
-- Risk score prediction using a **linear classifier**  
-
 <p align="left">
   <img src="framework.png" alt="Framework">
   <br>

@@ -106,19 +106,19 @@ python eval.py \
 <p align="center">
   <img src="loss_plot.png" alt="Loss Curves" width="500"/>
   <br>
-  <em>Training and validation loss over epochs.</em>
+  <em>Figure 2: Training and validation loss over epochs.</em>
 </p>
 
 <p align="center">
   <img src="cindex_plot.png" alt="C-index Curves" width="500"/>
   <br>
-  <em>Training and validation concordance index (C-index) over epochs.</em>
+  <em>Figure 3: Training and validation concordance index (C-index) over epochs.</em>
 </p>
 
 <p align="center">
   <img src="km_curve.png" alt="Kaplan–Meier Curve" width="500"/>
   <br>
-  <em>Kaplan–Meier curves for high- vs. low-risk patients.</em>
+  <em>Figure 4: Kaplan–Meier curves for high- vs. low-risk patients.</em>
 </p>
 
 

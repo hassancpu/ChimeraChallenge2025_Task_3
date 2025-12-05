@@ -25,7 +25,7 @@ Task 3 focuses on **predicting patient survival risk** using multi-modal data:
 <p align="left">
   <img src="framework.png" alt="Framework">
   <br>
-  <em>Figure 1: Framework of the proposed method. Patch features are first extracted using the UNI model, and the slide representation is obtained using ABMIL. The RNA embedding is compressed via the RNA encoder. The slide representation, compressed RNA embedding, and clinical data are then input to the fusion module. Finally, the risk score is predicted using a fully connected layer (predictor)..</em>
+  <em>Figure 1: Framework of the proposed method. Patch features are first extracted using the UNI model, and the slide representation is obtained using ABMIL. The RNA embedding is compressed via the RNA encoder. The slide representation, compressed RNA embedding, and clinical data are then input to the fusion module. Finally, the risk score is predicted using a fully connected layer (predictor).</em>
 </p>
 
 ---
@@ -106,11 +106,11 @@ We evaluated three multimodal fusion strategies for survival prediction: **ABMIL
 | **Model**   | **Fusion Strategy**  | **C-index** | 
 |:------------|:---------------:|:---------------:|
 | ABMIL Surv       | Simple concatenation | 0.88 | 
-| **ABMIL Surv PG**    | Low-rank bilinear fusion | **0.91** | 
+| **ABMIL Surv PG**    | **Low-rank bilinear fusion** | **0.91** | 
 | ABMIL Surv PG Res | Fusion + residual branch | 0.91 | 
 
 </div>
-<em>Table 1: Internal validation performance (C-index) of different multimodal fusion strategies. The best model is highlighted in bold.</em>
+<em>Table 1: Internal validation performance of different multimodal fusion strategies.</em>
 
 
 <p align="center">
@@ -119,12 +119,12 @@ We evaluated three multimodal fusion strategies for survival prediction: **ABMIL
 <td align="center">
   <img src="loss_plot.png" alt="Loss Curves" width="480"/>
   <br>
-  <em>Figure 3: Training and validation loss</em>
+  <em>Figure 3: Training and validation loss.</em>
 </td>
 <td align="center">
   <img src="cindex_plot.png" alt="C-index Curves" width="480"/>
   <br>
-  <em>Figure 4: Training and validation C-index</em>
+  <em>Figure 4: Training and validation C-index.</em>
 </td>
 </tr>
 </table>

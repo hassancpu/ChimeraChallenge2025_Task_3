@@ -104,15 +104,20 @@ python eval.py \
 </div>
 
 <p align="center">
-  <img src="loss_plot.png" alt="Loss Curves" width="500"/>
+<table>
+<tr>
+<td align="center">
+  <img src="loss_plot.png" alt="Loss Curves" width="300"/>
   <br>
-  <em>Figure 2: Training and validation loss over epochs.</em>
-</p>
-
-<p align="center">
-  <img src="cindex_plot.png" alt="C-index Curves" width="500"/>
+  <em>Figure 2: Training and validation loss</em>
+</td>
+<td align="center">
+  <img src="cindex_plot.png" alt="C-index Curves" width="300"/>
   <br>
-  <em>Figure 3: Training and validation C-index over epochs.</em>
+  <em>Figure 3: Training and validation C-index</em>
+</td>
+</tr>
+</table>
 </p>
 
 <p align="center">
@@ -120,6 +125,7 @@ python eval.py \
   <br>
   <em>Figure 4: Kaplan–Meier curves for high- vs. low-risk patients.</em>
 </p>
+
 
 
 

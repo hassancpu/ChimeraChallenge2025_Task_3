@@ -9,8 +9,9 @@ This repository contains code, models, and instructions for reproducing experime
 ## 📌 Table of Contents
 1. [Overview](#overview)  
 2. [Data](#data)  
-3. [Full Pipeline Usage](#full-pipeline-usage)  
-4. [License](#license)  
+3. [Full Pipeline Usage](#full-pipeline-usage)
+4. [Results](#results) 
+5. [License](#license)  
 
 ---
 
@@ -88,6 +89,18 @@ python eval.py \
 ```
 
 ---
+
+<a name="results"></a>
+## 📊 Results
+We evaluated our multimodal survival prediction models on the CHIMERA Task 3 dataset, integrating histology, RNA-seq, and clinical data. Three fusion strategies were tested:
+
+<div align="center">
+| **Model**   | **Fusion Strategy**  | **C-index**          | 
+|:------------|:---------------:|:---------------:|
+| ABMIL Surv       | Simple concatenation     | 0.88     | 
+| **ABMIL Surv PG**    | Low-rank bilinear fusion    | **0.91**     | 
+| ABMIL Surv PG Res | Fusion + residual branch| 0.91 | 
+</div>
 
 <a name="license"></a>
 ## ⚖ License

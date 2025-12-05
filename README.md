@@ -102,13 +102,14 @@ We evaluated three multimodal fusion strategies for survival prediction: **ABMIL
 </p>
 
 <div align="center">
+  
 | **Model**   | **Fusion Strategy**  | **C-index** | 
 |:------------|:---------------:|:---------------:|
 | ABMIL Surv       | Simple concatenation | 0.88 | 
 | **ABMIL Surv PG**    | Low-rank bilinear fusion | **0.91** | 
 | ABMIL Surv PG Res | Fusion + residual branch | 0.91 | 
-</div>
 
+</div>
 <em>Table 1: Internal validation performance (C-index) of different multimodal fusion strategies. The best model is highlighted in bold.</em>
 
 

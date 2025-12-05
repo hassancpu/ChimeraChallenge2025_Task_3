@@ -121,7 +121,7 @@ python eval.py \
 </p>
 
 <p align="center">
-  <img src="km_curve.png" alt="Kaplan–Meier Curve" width="300"/>
+  <img src="km_curve.png" alt="Kaplan–Meier Curve" width="480"/>
   <br>
   <em>Figure 4: Kaplan–Meier curves for high- vs. low-risk patients.</em>
 </p>

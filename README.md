@@ -93,6 +93,14 @@ python eval.py \
 <a name="results"></a>
 ## 📊 Results
 
+<p align="center">
+  <img src="Fusions.png" alt="Fusion Strategies" width="600"/>
+  <br>
+  <em>Figure 2: Illustration of different multimodal fusion strategies: (a) ABMIL Surv – simple concatenation, (b) ABMIL Surv PG – low-rank bilinear fusion between modality pairs, and (c) ABMIL Surv PG Res – low-rank fusion with additional residual connections.</em>
+</p>
+
+<div align="center">
+  
 <div align="center">
   
 | **Model**   | **Fusion Strategy**  | **C-index** | 
@@ -102,6 +110,8 @@ python eval.py \
 | ABMIL Surv PG Res | Fusion + residual branch | 0.91 | 
 
 </div>
+<em>Table 1: Comparison of survival prediction models with different multimodal fusion strategies. The best performing model (ABMIL Surv PG) is highlighted in bold. Performance is measured using the concordance index (C-index) on internal validation.</em>
+
 
 <p align="center">
 <table>
@@ -109,12 +119,12 @@ python eval.py \
 <td align="center">
   <img src="loss_plot.png" alt="Loss Curves" width="480"/>
   <br>
-  <em>Figure 2: Training and validation loss</em>
+  <em>Figure 3: Training and validation loss</em>
 </td>
 <td align="center">
   <img src="cindex_plot.png" alt="C-index Curves" width="480"/>
   <br>
-  <em>Figure 3: Training and validation C-index</em>
+  <em>Figure 4: Training and validation C-index</em>
 </td>
 </tr>
 </table>
@@ -123,7 +133,7 @@ python eval.py \
 <p align="center">
   <img src="km_curve.png" alt="Kaplan–Meier Curve" width="480"/>
   <br>
-  <em>Figure 4: Kaplan–Meier curves for high- vs. low-risk patients.</em>
+  <em>Figure 5: Kaplan–Meier curves for high- vs. low-risk patients.</em>
 </p>
 
 

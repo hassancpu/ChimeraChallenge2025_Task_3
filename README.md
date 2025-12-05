@@ -112,7 +112,7 @@ python eval.py \
 <p align="center">
   <img src="cindex_plot.png" alt="C-index Curves" width="500"/>
   <br>
-  <em>Figure 3: Training and validation concordance index (C-index) over epochs.</em>
+  <em>Figure 3: Training and validation C-index over epochs.</em>
 </p>
 
 <p align="center">

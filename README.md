@@ -110,6 +110,7 @@ We evaluated three multimodal fusion strategies for survival prediction: **ABMIL
 | ABMIL Surv PG Res | Fusion + residual branch | 0.91 | 
 
 </div>
+
 <em>Table 1: Internal validation performance of different multimodal fusion strategies.</em>
 
 

@@ -10,8 +10,7 @@ This repository contains code, models, and instructions for reproducing experime
 1. [Overview](#overview)  
 2. [Data](#data)  
 3. [Full Pipeline Usage](#full-pipeline-usage)  
-4. [Training & Evaluation](#training--evaluation)  
-5. [License](#license)  
+4. [License](#license)  
 
 ---
 

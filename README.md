@@ -95,6 +95,8 @@ python eval.py \
 
 We evaluated three multimodal fusion strategies for survival prediction: **ABMIL Surv** (simple concatenation), **ABMIL Surv PG** (low-rank bilinear fusion between modality pairs), and **ABMIL Surv PG Res** (fusion with residual connections). Figure 2 illustrates these architectures, and Table 1 summarizes their internal validation performance.
 
+<br>
+
 <!-- Figure -->
 <div align="center">
   <img src="Fusions.png" alt="Fusion Strategies" width="600"/>
@@ -119,7 +121,7 @@ We evaluated three multimodal fusion strategies for survival prediction: **ABMIL
     </tr>
     <tr>
       <td><strong>ABMIL Surv PG</strong></td>
-      <td>Low-rank bilinear fusion</td>
+      <td><strong>Low-rank bilinear fusion<strong></td>
       <td><strong>0.91</strong></td>
     </tr>
     <tr>

@@ -92,14 +92,15 @@ python eval.py \
 
 <a name="results"></a>
 ## 📊 Results
-We evaluated our multimodal survival prediction models on the CHIMERA Task 3 dataset, integrating histology, RNA-seq, and clinical data. Three fusion strategies were tested:
 
 <div align="center">
-| **Model**   | **Fusion Strategy**  | **C-index**          | 
+  
+| **Model**   | **Fusion Strategy**  | **C-index** | 
 |:------------|:---------------:|:---------------:|
-| ABMIL Surv       | Simple concatenation     | 0.88     | 
-| **ABMIL Surv PG**    | Low-rank bilinear fusion    | **0.91**     | 
-| ABMIL Surv PG Res | Fusion + residual branch| 0.91 | 
+| ABMIL Surv       | Simple concatenation | 0.88 | 
+| **ABMIL Surv PG**    | Low-rank bilinear fusion | **0.91** | 
+| ABMIL Surv PG Res | Fusion + residual branch | 0.91 | 
+
 </div>
 
 <a name="license"></a>

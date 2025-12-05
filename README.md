@@ -14,6 +14,7 @@ This repository contains code, models, and instructions for reproducing experime
 
 ---
 
+<a name="overview"></a>
 ## 🧠 Overview
 Task 3 focuses on **predicting patient survival risk** using multi-modal data:  
 - **Histopathology slides**  
@@ -28,6 +29,7 @@ Task 3 focuses on **predicting patient survival risk** using multi-modal data:
 
 ---
 
+<a name="data"></a>
 ## 📂 Data
 The CHIMERA Task 3 dataset must be downloaded from the official challenge website.  
 Organize the data as follows:  
@@ -43,6 +45,7 @@ clinical_preprocessor.pkl # Preprocessing object for clinical features
 
 ---
 
+<a name="full-pipeline-usage"></a>
 ## 🛠 Full Pipeline Usage
 
 Run the complete workflow for Task 3 in sequence:
@@ -86,6 +89,7 @@ python eval.py \
 
 ---
 
+<a name="license"></a>
 ## ⚖ License
 
 This repository is licensed under MIT License.

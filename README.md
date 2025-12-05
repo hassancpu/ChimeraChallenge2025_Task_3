@@ -127,6 +127,8 @@ python eval.py \
 </p>
 
 
+**Highlights:**  
+- Our method achieved **2nd place** on the **final test phase**.  
 
 
 <a name="license"></a>

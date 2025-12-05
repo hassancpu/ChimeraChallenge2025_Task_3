@@ -133,9 +133,7 @@ We evaluated three multimodal fusion strategies for survival prediction: **ABMIL
   <em>Table 1: Internal validation performance of different multimodal fusion strategies.</em>
 </div>
 
-
-
-
+<br>
 
 <p align="center">
 <table>

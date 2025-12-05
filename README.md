@@ -28,6 +28,12 @@ Task 3 focuses on **predicting patient survival risk** using multi-modal data:
 - Fusion of slide, RNA, and clinical data with multiple **fusion modules**  
 - Risk score prediction using a **linear classifier**  
 
+<p align="left">
+  <img src="framework.png" alt="Framework">
+  <br>
+  <em>Figure 1: Framework of the proposed method. Patch features are first extracted using the UNI model, and the slide representation is obtained using ABMIL. The RNA embedding is compressed via the RNA encoder. The slide representation, compressed RNA embedding, and clinical data are then input to the fusion module. Finally, the risk score is predicted using a fully connected layer (predictor)..</em>
+</p>
+
 ---
 
 ## 📂 Data
